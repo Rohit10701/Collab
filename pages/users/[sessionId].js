@@ -3,82 +3,66 @@ import React, { useState,useEffect} from 'react';
 import Editor from "@monaco-editor/react";
 import Axios from 'axios'; 
 // import { compile } from 'sass';
-import WriteToCloudFirestore from "@/components/cloudFirestore/write";
-import ReadToCloudFirestore from "@/components/cloudFirestore/read";
+import WriteToCloudFirestore from "@/firebase/write";
+import ReadToCloudFirestore from "@/firebase/read";
 import initFirebase from "../../firebase/initfirebase";
+import {io} from 'socket.io-client';
 
 initFirebase()
 const  SessionDetail = () => {
-
-
-
     const router = useRouter()
     const sessionId = router.query.sessionId
-    
     const [userCode, setUserCode] = useState("");
-    const [userInput, setUserInput] = useState("");
-    const [userOutput, setUserOutput] = useState("");
-    // const [sessionData, setSessionData] = useState(userCode);
-
+    const [socket, setSocket] = useState(null)
+    const [serverData, setServerData] = useState("")
+    const [userOutput,setUserOutput] = useState("")
+    
+    
     useEffect(() => {
-      WriteToCloudFirestore(sessionId, userCode);
-      const data = ReadToCloudFirestore(sessionId);
-      data.then(function (result) {
-        if(!!result){
-          if(result.string_data!==""){
-            console.log("data in useeffect",result.string_data)
-            setUserCode(result.string_data)
-          }
-        }
-        
-    })},[userCode]);
-   
-    
-    
-
-    
-    // WriteToCloudFirestore(sessionId,userCode)
-    // const data = ReadToCloudFirestore(sessionId)
-    // console.log(data)
-    
-    // let sessionData
-    // const data = Promise.resolve(ReadToCloudFirestore(sessionId))
-    
-    
-    // data.then(function(result) {
-    //     return result;
-    // }).then(function(result) {
-    //     sessionData = result;
-    //     console.log("session data new", sessionData); // Output: proi
-    // });
-
-    // console.log("outside callback data", sessionData);
-    
       
+      const socket = io("ws://localhost:3030");
+      setSocket(socket);
+
+      socket.on("hello from server", (data) => {
+        setServerData(data.message)
+        console.log("Received message from server:", data.message);
+      });
+  
+      return () => {
+        socket.disconnect();
+      };
+    }, [serverData]);
     
+    
+    useEffect(()=>{
+      console.log("emitted")
+      if(socket){
+        socket.emit('code', userCode);
+      }
+    },[userCode])
 
-    //Compile the Program
     async function  run (){
-        if (userCode===" "){
-        return;
-        }
-        await Axios.post('/api/editor', {
-        code: userCode,
-        language: "python3",
-        input: userInput 
-        }).catch(e=>console.error(e))
-    }
+      if (userCode===" "){
+      return;
+      }
+      await Axios.post('/api/editor', {
+      code: userCode,
+      language: "python3",
+      input: userInput 
+      }).catch(e=>console.error(e))
+  }
 
-    //Clear output
-    function clearOutput(){
-        userOutput("");
-    }
+  //Clear output
+  function clearOutput(){
+      userOutput("");
+  }
+
 
 
     return (
       <>
         <h1>{sessionId}</h1>
-        <Editor height="90vh" language="python" onChange={(value) => {setUserCode(value)}} value={userCode}/>
+        <Editor height="80vh" language="python" onChange={(value) => {setUserCode(value)}} value={serverData}/>
         <button type="submit" onClick={run}> Run </button>
       </>
     )

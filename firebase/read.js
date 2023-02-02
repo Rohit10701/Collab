@@ -14,7 +14,7 @@ export const ReadToCloudFirestore = (sessionId) => {
             .onSnapshot(function (doc) {
               console.log("data from server", doc.data())
               resolve(
-                doc.data()
+                doc.data() //object
                 );
             })
 

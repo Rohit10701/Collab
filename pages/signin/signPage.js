@@ -1,4 +1,4 @@
-import { signInWithGooglePopup,createUserDocumentFromAuth} from "../../components/cloudFirestore/auth";
+import { signInWithGooglePopup,createUserDocumentFromAuth} from "../../firebase/auth";
 import { useRouter } from 'next/router'
 
 const signIn = () => {

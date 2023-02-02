@@ -7,8 +7,8 @@ import Axios from 'axios';
 import { useRouter } from 'next/router'
 // import { compile } from 'sass';
 import firebase from "../firebase/initfirebase"
-import WriteToCloudFirestore from '@/components/cloudFirestore/write';
-import ReadToCloudFirestore from '@/components/cloudFirestore/read';
+import WriteToCloudFirestore from '@/firebase/write';
+import ReadToCloudFirestore from '@/firebase/read';
 import  RandGen from '@/components/randGen';
 
 firebase()
