@@ -1,7 +1,4 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"
 import Axios from 'axios';
-// import {writeUserData} from "../utils/firebase/firebase.write"
 export default async function handler(req, res) {
     
     
@@ -28,10 +25,4 @@ export default async function handler(req, res) {
     .then((res)=>{console.log(res.data.output)})
     .catch((err)=>{console.log(err)})
     
-    
-
-    // if (!body.editor) {
-    //   return res.status(400).json({ data: 'editor not found' })
-    // }
-    // res.status(200).json({ data: `${body.inputValue}` })  
   }
