@@ -1,4 +1,4 @@
-import { signInWithGooglePopup,createUserDocumentFromAuth} from "../../firebase/auth";
+import { signInWithGooglePopup,createUserDocumentFromAuth} from "../firebase/auth";
 import { useRouter } from 'next/router'
 
 const signIn = () => {
@@ -8,7 +8,7 @@ const signIn = () => {
         const userDocRef = await createUserDocumentFromAuth(user)
         const authuid = userDocRef.firestore._authCredentials.currentUser.uid;
         e.preventDefault()
-        router.push('/users/'+authuid)
+        router.push(authuid)
     };
     return (
         <div>

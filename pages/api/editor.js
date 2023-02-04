@@ -1,8 +1,10 @@
+import { output } from '@/next.config';
 import Axios from 'axios';
+import { useState } from 'react';
+// import SessionDetail from '../[sessionId]';
 export default async function handler(req, res) {
-    
-    
 
+    // const [output,setoutput] =useState("")
     //have to take data from database this is temperary
     const body = req.body
     console.log("server",body)
@@ -19,10 +21,15 @@ export default async function handler(req, res) {
       versionIndex :"3"
     }
     const url = "https://api.jdoodle.com/v1/execute";
-  
 
-    await Axios.post(url,program)
-    .then((res)=>{console.log(res.data.output)})
-    .catch((err)=>{console.log(err)})
+
+    const response = await Axios.post(url,program)
+    console.log(response.data.output)
+    // const op = response.data.output
+    // setoutput(op)
+
+    // return(
+    //   <SessionDetail output={output}/>
+    // )
     
   }

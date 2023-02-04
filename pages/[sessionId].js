@@ -3,11 +3,11 @@ import React, { useState,useEffect} from 'react';
 import Editor from "@monaco-editor/react";
 import Axios from 'axios'; 
 import WriteToCloudFirestore from "@/firebase/write";
-import initFirebase from "../../firebase/initfirebase";
+import initFirebase from "../firebase/initfirebase";
 import {io} from 'socket.io-client';
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/firestore'
-
+import handler from "./api/editor";
 initFirebase()
 
 const  SessionDetail = () => {
@@ -18,7 +18,7 @@ const  SessionDetail = () => {
     const [socket, setSocket] = useState(null)
     const [serverData, setServerData] = useState("")
     const [userOutput,setUserOutput] = useState("")
-
+    const [userInput,setUserInput] = useState("")
     //initital render to check database
     useEffect(() => {
       const id = router.query.sessionId
@@ -73,7 +73,10 @@ const  SessionDetail = () => {
       code: userCode,
       language: "python3",
       input: userInput 
-      }).catch(e=>console.error(e))
+      }).then((response)=>{
+        console.log("ok")
+        console.log(response)
+      })
   }
 
   //Clear output
@@ -86,8 +89,10 @@ const  SessionDetail = () => {
     return (
       <>
         <h1>{sessionId}</h1>
+        {/* <p>{output}</p> */}
         <Editor height="80vh" language="python" onChange={(value) => {setUserCode(value)}} value={serverData}/>
         <button type="submit" onClick={run}> Run </button>
+        <button type="submit" onClick={clearOutput}> Run </button>
       </>
     )
 }

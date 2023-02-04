@@ -17,11 +17,11 @@ const RandGen = () => {
     const randStr = async (e) =>{
         const randomString = await generateString(6);
         e.preventDefault()
-        router.push('/users/'+randomString)
+        router.push(randomString)
     }
 
     return (
-        <button onClick={randStr}>Random Number</button>
+        <button onClick={randStr} >Random Number</button>
     )
 }
 export default RandGen;
