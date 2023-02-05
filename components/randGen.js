@@ -21,7 +21,7 @@ const RandGen = () => {
     }
 
     return (
-        <button onClick={randStr} >Random Number</button>
+        <button onClick={randStr} class="btn btn-dark login_buttom">Anonymous</button>
     )
 }
 export default RandGen;

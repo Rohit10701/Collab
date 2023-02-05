@@ -65,34 +65,44 @@ const  SessionDetail = () => {
     },[userCode])
 
   //run function
-    async function  run (){
-      if (userCode===" "){
-      return;
+  const onRun = ()=>{
+    async function  run (){ 
+      try{
+        console.log("in try out")
+        const resopnse = await Axios.post('/api/editor', {
+          code: userCode,
+          language: "python3",
+          input: userInput 
+          })
+          console.log("session",resopnse.data.output)
+          setUserOutput(resopnse.data.output)
+      }catch(err){
+        console.log(err)
       }
-      await Axios.post('/api/editor', {
-      code: userCode,
-      language: "python3",
-      input: userInput 
-      }).then((response)=>{
-        console.log("ok")
-        console.log(response)
-      })
+    }
+    run()
   }
+    
+
 
   //Clear output
   function clearOutput(){
-      userOutput("");
+      setUserOutput("")
   }
 
 
 
     return (
       <>
-        <h1>{sessionId}</h1>
-        {/* <p>{output}</p> */}
-        <Editor height="80vh" language="python" onChange={(value) => {setUserCode(value)}} value={serverData}/>
-        <button type="submit" onClick={run}> Run </button>
-        <button type="submit" onClick={clearOutput}> Run </button>
+      <div>
+        <Editor height="87vh" width="150vh" language="python" onChange={(value) => {setUserCode(value)}} value={serverData}/>
+      </div>
+        
+        <button onClick={onRun} class="btn btn-dark editor-button"> Run </button>
+        <button  onClick={clearOutput} class="btn btn-dark editor-button"> clear output </button>
+        
+        <textarea class="input-box" rows="1000" placeholder=" Type the input before clicking the run"></textarea>
+        <textarea class="output-box" rows="1000" value={userOutput} placeholder="  output"></textarea>
       </>
     )
 }

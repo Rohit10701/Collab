@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router'
 import firebase from "../firebase/initfirebase"
 import  RandGen from '@/components/randGen';
-import bg from '../public/placeholder.png'
+import bg from '../public/back.jpeg'
+import '../styles/Home.module.css'
 firebase()
 
 export default function Home() {
@@ -12,6 +13,8 @@ export default function Home() {
     e.preventDefault()
     router.push('/signin')
   }
+  
+  
   return (
 
     
@@ -19,13 +22,25 @@ export default function Home() {
         backgroundImage: `url(${bg.src})`,
         width: '100%',
         height: '100%',
-      }}>
-        <div>
-          <RandGen/>
-        </div>
+        backgroundSize: 'cover'
+      }} >
+      
         
-        <h1>This is Home Page!</h1>
-        <button onClick={ToSignIn}>To Login Page</button>  
+        
+        <div class="text-center">
+          <div class=" text-center flex-container ">
+              
+          
+              <h1 class="title" >Collab
+              <p class="title-body"> <br/>Share Code in Real-time with Developers<br/>An online code editor for interviews, <br/>troubleshooting, teaching & more…</p></h1>
+          </div>
+          <div class=" flex-container ">
+            <RandGen/>
+            <button  class="btn btn-dark login_buttom " onClick={ToSignIn} >Login</button>
+          </div>
+    
+          
+        </div>  
       </div>
     );
 }

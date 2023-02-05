@@ -1,6 +1,6 @@
 import { signInWithGooglePopup,createUserDocumentFromAuth} from "../firebase/auth";
 import { useRouter } from 'next/router'
-
+import bg from '../public/back.jpeg'
 const signIn = () => {
     const router = useRouter()
     const logGoogleUser = async (e) => {
@@ -11,10 +11,20 @@ const signIn = () => {
         router.push(authuid)
     };
     return (
-        <div>
-            <h1>SignIn Page</h1>
-            <button onClick={logGoogleUser}>Sign in with Google Popup</button> 
-        </div>
+
+        
+            <div class="signin" style={{
+                backgroundImage: `url(${bg.src})`,
+                backgroundSize: 'cover'
+              }}>
+                <div >
+                    <h1 class="signin-text">SignIn Page</h1>  
+                </div>
+                <div class="">   
+                    <button onClick={logGoogleUser} class="btn btn-dark">Sign in with Google Popup</button> 
+                </div>
+            </div>
+        
     )
 }
 export default signIn;

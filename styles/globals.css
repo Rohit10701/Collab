@@ -1,0 +1,100 @@
+.home_margin{
+    margin-left: 20px;
+
+}
+.navbar {
+    background:transparent;
+    background-color: #E8E7F0;
+}
+
+.text_margin{
+    margin-bottom: 250px;
+}
+
+.login_buttom{
+    margin-top: 220px;
+    margin-left: 20px;
+    margin-bottom: 300px;
+}
+
+.flex-container {
+    display: flex;
+    height: 330px;
+    justify-content: center;
+    align-items: center;
+  }
+.title{
+    margin-bottom: 30px;
+    margin-top: 250px;
+    font-size: 48px;
+    font-weight: bolder
+}
+
+.title-body{
+    font-size: 28px;
+    font-weight:500
+}
+
+
+.signin{
+    background-color: #f2f2f4;
+    display: flex;
+    height: 660px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.footer{
+    background-color: #E8E7F0;
+}
+
+.signin-text{
+    margin-right: 20px;
+}
+
+.about-body{
+    height: 660px;
+    background-color: #f2f2f4;
+    text-align: center;
+    padding-top: 210px;
+}
+.about{
+    width:400px;
+    text-align: center;
+}
+
+.about-title{
+    font-size: 48px;
+    font-weight: bolder
+}
+
+.about-content{
+    font-size: 20px;
+    font-weight:500
+}
+
+.editor-button{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.input-box{
+    position: absolute;
+    right:10px;
+    top: 65px;
+    margin-right: 60px;
+    width: 380px;
+    height:300px;
+
+}
+
+.output-box{
+    position: absolute;
+    right:10px;
+    top: 400px;
+    margin-right: 60px;
+    width: 380px;
+    height:300px;
+
+}
