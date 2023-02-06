@@ -9,9 +9,10 @@ export default function App({ Component, pageProps }) {
       <nav class="navbar navbar-default ">
         <div class="container-fluid">
             <div class="navbar-header">
-              <a href="/" class="navbar-brand home_margin">Home</a>
+              <a href="/" class="navbar-brand home_margin">Collab</a>
             </div>
             <div>
+              
               <a href="/about">
                 <button type="button" class="btn btn-default navbar-btn ">About</button>
               </a>
@@ -30,7 +31,7 @@ export default function App({ Component, pageProps }) {
       <div>
             <footer class=" text-center text-black footer">
               <div class="text-center p-3">
-                © 2023 Copyright: Rohit Kumar
+                Made by Rohit Kumar &hearts;
               </div>
 
             </footer>

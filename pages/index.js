@@ -32,7 +32,7 @@ export default function Home() {
               
           
               <h1 class="title" >Collab
-              <p class="title-body"> <br/>Share Code in Real-time with Developers<br/>An online code editor for interviews, <br/>troubleshooting, teaching & more…</p></h1>
+              <p class="title-body"> <br/>Share Code in Real-time with Developers<br/>An online userfriendly code editor, <br/>for learning, teaching and more…</p></h1>
           </div>
           <div class=" flex-container ">
             <RandGen/>

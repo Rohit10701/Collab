@@ -10,10 +10,10 @@ const io = require("socket.io")( {
 io.on("connection", (socket) => {
 
   
-  console.log("connected")
+  // console.log("connected")
 
   socket.on("code", (data) => {
-    console.log("Received code from client:", data);
+    // console.log("Received code from client:", data);
     socket.broadcast.emit("hello from server", { message: data })
   });
 

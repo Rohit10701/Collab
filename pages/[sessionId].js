@@ -16,13 +16,18 @@ const  SessionDetail = () => {
     const sessionId = router.query.sessionId
     const [userCode, setUserCode] = useState("");
     const [socket, setSocket] = useState(null)
-    const [serverData, setServerData] = useState("")
+    const [serverData, setServerData] = useState("#compile and Run or share in any language")
     const [userOutput,setUserOutput] = useState("")
     const [userInput,setUserInput] = useState("")
-    //initital render to check database
+    const [userLang, setUserLang] = useState("python")
+    const [langPass,setLangPass] = useState("")
+
+
+    console.log(userLang)
+     //initital render to check database
     useEffect(() => {
       const id = router.query.sessionId
-      console.log("in use effect")
+      // console.log("in use effect")
       firebase
       .firestore()
       .collection('test1')
@@ -47,7 +52,7 @@ const  SessionDetail = () => {
       socket.on("hello from server", (data) => {
         setServerData(data.message)
         WriteToCloudFirestore(sessionId,data.message)
-        console.log("Received message from server:", data.message);
+        // console.log("Received message from server:", data.message);
       });
   
       return () => {
@@ -57,7 +62,7 @@ const  SessionDetail = () => {
     
     
     useEffect(()=>{
-      console.log("emitted")
+      // console.log("emitted")
       if(socket){
         socket.emit('code', userCode);
         WriteToCloudFirestore(sessionId,userCode)
@@ -65,16 +70,19 @@ const  SessionDetail = () => {
     },[userCode])
 
   //run function
+  
+  
+
   const onRun = ()=>{
     async function  run (){ 
       try{
-        console.log("in try out")
+        // console.log("in try out")
         const resopnse = await Axios.post('/api/editor', {
           code: userCode,
-          language: "python3",
+          language: langPass,
           input: userInput 
           })
-          console.log("session",resopnse.data.output)
+          // console.log("session",resopnse.data.output)
           setUserOutput(resopnse.data.output)
       }catch(err){
         console.log(err)
@@ -83,26 +91,47 @@ const  SessionDetail = () => {
     run()
   }
     
-
+  useEffect(()=>{
+    if(userLang === "python"){
+      setLangPass("python3")
+    }
+    else if(userLang === "java"){
+      setLangPass("java")
+    }
+    else if(userLang === "cpp"){
+      setLangPass("cpp")
+    }
+    else{
+      setLangPass("c")
+    }
+  },[userLang])
 
   //Clear output
   function clearOutput(){
       setUserOutput("")
   }
 
-
+  
 
     return (
       <>
       <div>
-        <Editor height="87vh" width="150vh" language="python" onChange={(value) => {setUserCode(value)}} value={serverData}/>
+        <Editor height="87vh" width="150vh" language={userLang} onChange={(value) => {setUserCode(value)}} value={serverData} />
       </div>
         
         <button onClick={onRun} class="btn btn-dark editor-button"> Run </button>
         <button  onClick={clearOutput} class="btn btn-dark editor-button"> clear output </button>
-        
-        <textarea class="input-box" rows="1000" placeholder=" Type the input before clicking the run"></textarea>
-        <textarea class="output-box" rows="1000" value={userOutput} placeholder="  output"></textarea>
+        <div class="dropup">
+          <button class="dropbtn btn btn-dark editor-button lang-button">{userLang}</button>
+          <div class="dropup-content">
+            <button onClick={() => {setUserLang("python")}}  class="btn btn-dark editor-button">python</button>
+            <button onClick={() => {setUserLang("c")}}  class="btn btn-dark ">c</button>
+            <button onClick={() => {setUserLang("cpp")}}  class="btn btn-dark cpp-button ">c++</button>
+            <button onClick={() => {setUserLang("java")}}  class="btn btn-dark cpp-button ">java</button>
+          </div>
+        </div>
+        <textarea class="input-box" rows="1000" placeholder="Input feature will coming soon..."></textarea>
+        <textarea class="output-box" rows="1000" value={userOutput} placeholder="output"></textarea>
       </>
     )
 }
