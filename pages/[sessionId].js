@@ -116,7 +116,7 @@ const  SessionDetail = () => {
     return (
       <>
       <div>
-        <Editor height="87vh" width="150vh" language={userLang} onChange={(value) => {setUserCode(value)}} value={serverData} />
+        <Editor height="84vh" language={userLang} onChange={(value) => {setUserCode(value)}} value={serverData} />
       </div>
         
         <button onClick={onRun} class="btn btn-dark editor-button"> Run </button>

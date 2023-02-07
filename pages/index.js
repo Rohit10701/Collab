@@ -32,11 +32,15 @@ export default function Home() {
               
           
               <h1 class="title" >Collab
-              <p class="title-body"> <br/>Share Code in Real-time with Developers<br/>An online userfriendly code editor, <br/>for learning, teaching and more…</p></h1>
+              <p class="title-body"> <br/>Share Code in Real-time with Developers<br/>An online userfriendly code editor, <br/>for learning, teaching and more…</p><br/>
+              <RandGen/>
+              <button  class="btn btn-dark login_buttom " onClick={ToSignIn} >Login</button>
+              </h1>
+              
+          
           </div>
           <div class=" flex-container ">
-            <RandGen/>
-            <button  class="btn btn-dark login_buttom " onClick={ToSignIn} >Login</button>
+            
           </div>
     
           
