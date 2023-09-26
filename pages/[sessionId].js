@@ -16,7 +16,7 @@ const  SessionDetail = () => {
     const sessionId = router.query.sessionId
     const [userCode, setUserCode] = useState("");
     const [socket, setSocket] = useState(null)
-    const [serverData, setServerData] = useState("#compile and Run or share in any language")
+    const [serverData, setServerData] = useState("#compile and Run or share in any language(Scroll down for output)")
     const [userOutput,setUserOutput] = useState("")
     const [userInput,setUserInput] = useState("")
     const [userLang, setUserLang] = useState("python")
@@ -130,7 +130,6 @@ const  SessionDetail = () => {
             <button onClick={() => {setUserLang("java")}}  class="btn btn-dark cpp-button ">java</button>
           </div>
         </div>
-        <textarea class="input-box" rows="1000" placeholder="Input feature will coming soon..."></textarea>
         <textarea class="output-box" rows="1000" value={userOutput} placeholder="output"></textarea>
       </>
     )

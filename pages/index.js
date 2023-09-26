@@ -21,13 +21,15 @@ export default function Home() {
       <div style={{
         backgroundImage: `url(${bg.src})`,
         width: '100%',
-        height: '100%',
+        height: '100vh',
         backgroundSize: 'cover'
-      }} >
+      }} 
+      className='index'
+      >
       
         
         
-        <div class="text-center">
+        <div class="flex">
           <div class=" text-center flex-container ">
               
           
